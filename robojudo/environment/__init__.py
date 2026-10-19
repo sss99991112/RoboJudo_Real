@@ -32,3 +32,4 @@ env_registry.add("UnitreeEnv", ".unitree_env")
 env_registry.add("UnitreeCppEnv", ".unitree_cpp_env")
 
 env_registry.add("UniLabRecoveryMujocoEnv", ".unilab_recovery_mujoco_env")
+env_registry.add("UniLabStandingAssistMujocoEnv", ".unilab_standing_assist_mujoco_env")

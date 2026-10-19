@@ -8,12 +8,15 @@ from robojudo.pipeline.rl_pipeline import RlPipeline
 
 @pipeline_registry.register
 class UniLabRecoverySimPipeline(RlPipeline):
+    POLICY_TYPE = "UniLabRecoveryPolicy"
+    ENV_TYPE = "UniLabRecoveryMujocoEnv"
+
     def __init__(self, cfg):
         # Validate before constructing any environment or controller.
         if (
             not cfg.env.is_sim
-            or cfg.env.env_type != "UniLabRecoveryMujocoEnv"
-            or cfg.policy.policy_type != "UniLabRecoveryPolicy"
+            or cfg.env.env_type != self.ENV_TYPE
+            or cfg.policy.policy_type != self.POLICY_TYPE
             or cfg.env.policy_gyro_sensor != "torso_gyro"
             or cfg.env.policy_upvector_sensor != "torso_upvector"
             or cfg.env.actuator_control_mode != "position"

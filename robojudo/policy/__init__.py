@@ -42,3 +42,4 @@ policy_registry.add("KungfuBotGeneralPolicy", ".kungfubot_policy")
 policy_registry.add("TwistPolicy", ".twist_policy")
 
 policy_registry.add("UniLabRecoveryPolicy", ".unilab_recovery_policy")
+policy_registry.add("UniLabStandingAssistPolicy", ".unilab_standing_assist_policy")

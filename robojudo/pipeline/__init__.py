@@ -30,3 +30,4 @@ pipeline_registry.add("RlMultiPolicyPipeline", ".rl_multi_policy_pipeline")
 pipeline_registry.add("RlLocoMimicPipeline", ".rl_loco_mimic_pipeline")
 
 pipeline_registry.add("UniLabRecoverySimPipeline", ".unilab_recovery_sim_pipeline")
+pipeline_registry.add("UniLabStandingAssistSimPipeline", ".unilab_standing_assist_sim_pipeline")
