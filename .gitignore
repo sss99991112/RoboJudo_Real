@@ -132,3 +132,6 @@ assets/motions
 logs
 MUJOCO_LOG.TXT
 assets/resources
+# Local frozen-policy exports and simulation evidence (never uploaded).
+.local-build/
+assets/models/g1/unilab/g1_three_expert_dagger_iteration_2/policy.pt

@@ -3,7 +3,6 @@ import logging
 import time
 
 import mujoco
-import mujoco_viewer
 import numpy as np
 
 from robojudo.environment import Environment, env_registry
@@ -39,23 +38,28 @@ class MujocoEnv(Environment):
         self._apply_init_qpos()
         mujoco.mj_step(self.model, self.data)  # pyright: ignore[reportAttributeAccessIssue]
 
-        self.viewer = mujoco_viewer.MujocoViewer(
-            self.model,
-            self.data,
-            width=1200,
-            height=900,
-            hide_menus=True,
-            diable_key_callbacks=True,
-        )
-        self.viewer.cam.distance = 3.0
-        self.viewer.cam.elevation = -10.0
-        self.viewer.cam.azimuth = 180.0
-        # self.viewer._paused = True
+        self.viewer = None
+        self.visualizer = None
+        if not cfg_env.headless:
+            import mujoco_viewer
 
-        if cfg_env.visualize_extras:
-            self.visualizer = MujocoVisualizer(self.viewer)
-        else:
-            self.visualizer = None
+            self.viewer = mujoco_viewer.MujocoViewer(
+                self.model,
+                self.data,
+                width=1200,
+                height=900,
+                hide_menus=True,
+                diable_key_callbacks=True,
+            )
+            self.viewer.cam.distance = 3.0
+            self.viewer.cam.elevation = -10.0
+            self.viewer.cam.azimuth = 180.0
+            # self.viewer._paused = True
+
+            if cfg_env.visualize_extras:
+                self.visualizer = MujocoVisualizer(self.viewer)
+            else:
+                self.visualizer = None
 
         self.last_time = time.time()
 
@@ -185,9 +189,10 @@ class MujocoEnv(Environment):
         if hand_pose is not None:
             logger.info("Hand pose-->", hand_pose)
 
-        self.viewer.cam.lookat = self.data.qpos.astype(np.float32)[:3]
-        if self.viewer.is_alive:
-            self.viewer.render()
+        if self.viewer is not None:
+            self.viewer.cam.lookat = self.data.qpos.astype(np.float32)[:3]
+            if self.viewer.is_alive:
+                self.viewer.render()
 
         for _ in range(self.sim_decimation):
             if self.actuator_control_mode == "position":
@@ -202,7 +207,8 @@ class MujocoEnv(Environment):
         self.update(simple=False)
 
     def shutdown(self):
-        self.viewer.close()
+        if self.viewer is not None:
+            self.viewer.close()
 
 
 if __name__ == "__main__":

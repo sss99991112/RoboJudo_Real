@@ -35,6 +35,7 @@ class MujocoEnvCfg(EnvCfg):
     env_type: str = "MujocoEnv"
     is_sim: bool = True
     # ====== ENV CONFIGURATION ======
+    headless: bool = False
     sim_duration: float = 60.0
     sim_dt: float = 0.001
     sim_decimation: int = 20

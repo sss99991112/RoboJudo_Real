@@ -40,3 +40,5 @@ policy_registry.add("UniLabDistillPolicy", ".unilab_distill_policy")
 policy_registry.add("FADAPlannerIDMPolicyAdapter", ".fada_policy")
 policy_registry.add("KungfuBotGeneralPolicy", ".kungfubot_policy")
 policy_registry.add("TwistPolicy", ".twist_policy")
+
+policy_registry.add("UniLabRecoveryPolicy", ".unilab_recovery_policy")

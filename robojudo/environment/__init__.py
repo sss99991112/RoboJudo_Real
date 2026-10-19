@@ -30,3 +30,5 @@ env_registry.add("DummyEnv", ".dummy_env")
 # env_registry.add("GrxEnv", ".fourier_env")
 env_registry.add("UnitreeEnv", ".unitree_env")
 env_registry.add("UnitreeCppEnv", ".unitree_cpp_env")
+
+env_registry.add("UniLabRecoveryMujocoEnv", ".unilab_recovery_mujoco_env")
